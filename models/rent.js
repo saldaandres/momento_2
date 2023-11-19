@@ -8,6 +8,11 @@ const rentSchema = new Schema({
     rentDate: {
         type: Date,
         default: Date.now
+    },
+    finalDate: Date,
+    currentStatus: {
+        type: Boolean,
+        default: true
     }
 })
 

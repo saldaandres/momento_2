@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-    let {brand, plate} = req.body
+    let {brand, plate, dailyValue} = req.body
     if (brand === '' || plate === ''){
         error = true
         message = 'Rellena la placa y la marca del carro'
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
                 res.redirect('/car')
             }
             else {
-                const newCar = new Car({plate, brand})
+                const newCar = new Car({plate, brand, dailyValue})
                 newCar.save()
                 error = false
                 message = 'Carro agregado con exito'

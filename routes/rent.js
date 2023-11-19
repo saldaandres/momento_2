@@ -1,8 +1,12 @@
 const express = require('express')
+const cors = require('cors')
 const Rent = require('../models/rent')
 const User = require('../models/user')
 const Car = require('../models/car')
+const moment = require("moment");
 const router = express.Router()
+
+router.use(cors())
 
 let error = false
 let message = ''
@@ -14,7 +18,24 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    let {rentNumber, userName, plate} = req.body
+    let {rentNumber, userName, plate, rentDate, finalDate} = req.body
+
+    if (!rentDate || !finalDate) {
+        error = true
+        message = 'Rellena las fechas'
+        res.redirect('/rent')
+        return
+    }
+
+    let inicial = moment(rentDate)
+    let final = moment(finalDate)
+
+    if (inicial.isAfter(final)) {
+        error = true
+        message = 'Revisa las fechas'
+        res.redirect('/rent')
+        return
+    }
 
     if (rentNumber === '' || userName === '' || plate === '') {
         error = true

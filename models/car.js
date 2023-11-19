@@ -7,7 +7,8 @@ const carSchema = Schema({
     available: {
         type: Boolean,
         default: true
-    }
+    },
+    dailyValue: Number
 })
 
 module.exports = mongoose.model('Car', carSchema)

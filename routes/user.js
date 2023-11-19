@@ -1,6 +1,8 @@
 const express = require('express')
+const cors = require('cors')
 const User = require("../models/user");
 const router = express.Router()
+router.use(cors())
 
 let error = false
 let message = ''
@@ -12,8 +14,8 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    let {userName, name, password} = req.body
-    if (userName === '' || name === '' || password === '') {
+    let {userName, name, password, reserveWord, role} = req.body
+    if (userName === '' || name === '' || password === '' || reserveWord === '') {
         error = true
         message = 'Rellena todos los campos'
         res.redirect('/user')
@@ -28,7 +30,16 @@ router.post('/', async (req, res) => {
             res.redirect('/user')
         }
         else {
-            const newUser = new User(req.body)
+            if (!role) {
+                role = 'user'
+            }
+            const newUser = new User({
+                userName,
+                name,
+                password,
+                reserveWord,
+                role
+            })
             newUser.save()
             error = false
             message = 'Usuario agregado con exito'

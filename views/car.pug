@@ -21,6 +21,11 @@ html
                         div.form-group
                             label(for='brand') Marca
                             input.form-control(type='text' id='brand' placeholder='Marca' name='brand')
+                div.row
+                    div.col
+                        div.form-group
+                            label(for='plate') Valor Diario
+                            input.form-control(type='number' id='dailyValue' placeholder='Valor por día' name='dailyValue')
 
                 br
                 .row.justify-content-center
@@ -39,10 +44,12 @@ html
                             th Placa
                             th Marca
                             th Estado
+                            th Valor Diario
                     tbody
                         for car in cars
                             tr
                                 th #{car.plate.toUpperCase()}
                                 td #{car.brand.toUpperCase()}
                                 td #{car.available ? 'Disponible' : 'Rentado'}
+                                td #{car.dailyValue}
 

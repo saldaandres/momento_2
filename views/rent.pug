@@ -17,6 +17,7 @@ html
                         div.form-group
                             label(for='rentNumber') # Renta
                             input.form-control(type='text' id='rentNumber' placeholder='Numero de Renta' name='rentNumber')
+
                 div.row
                     div.col
                         div.form-group
@@ -26,6 +27,16 @@ html
                         div.form-group
                             label(for='userName') Usuario
                             input.form-control(type='text' id='userName' placeholder='Usuario' name='userName')
+
+                div.row
+                    div.col
+                        div.form-group
+                            label(for='rentDate') Inicio
+                            input.form-control(type='date' value= `${moment().format('YYYY-MM-DD')}` id='rentDate' name='rentDate')
+                    div.col
+                        div.form-group
+                            label(for='finalDate') Fin
+                            input.form-control(type='date' id='finalDate' name='finalDate')
 
                 br
                 .row.justify-content-center
@@ -45,14 +56,20 @@ html
                             th(scope='col') #
                             th(scope='col') Usuario
                             th(scope='col') Placa
-                            th(scope='col') Fecha
+                            th(scope='col') Inicio
+                            th(scope='col') Fin
+                            th(scope='col') Estado
+
                     tbody
                         for rent in rents
                             tr
                                 th #{rent.rentNumber}
                                 td #{rent.userName}
                                 td #{rent.plate.toUpperCase()}
-                                td #{rent.rentDate.toLocaleDateString('es-CO')}
+                                td #{moment(rent.rentDate).utc().format('DD-MM-YYYY')}
+                                td #{moment(rent.finalDate).utc().format('DD-MM-YYYY')}
+                                td #{rent.currentStatus ? 'Abierta' : 'Cerrada'}
+
 
 
 

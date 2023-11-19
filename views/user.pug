@@ -26,10 +26,23 @@ html
                         div.form-group
                             label(for='name') Nombre
                             input.form-control(type='text' id='name' placeholder='Nombre' name='name')
+
+                .row
+                    div.col
+                        div.form-group
+                            label(for='reserveWord') Palabra Secreta
+                            input.form-control(type='text' id='reserveWord' placeholder='reserveWord' name='reserveWord')
+
+                .row
+                    .col
+                        .form-group
+                            input.form-check-input(type='checkbox' value='admin' id='role' name='role')
+                            label(for='role') Eres Admin?
+
                 br
                 .row.justify-content-center
                     .col
-                        button.btn.btn-success(type="submit") Guardar
+                        button.btn.btn-success(type="submit") Crear Usuario
                     .col
                         button.btn.btn-outline-success(type='submit' formaction='/user/login' formmethod='post') Iniciar Sesion
 
